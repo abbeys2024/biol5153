@@ -1,9 +1,24 @@
 #! /usr/bin/env python3
+import argparse
 
-def get_input():    
-    #get the input
-    number = input("Enter the Number: ")
-    return number
+def get_args():
+    # create an argumentParser object
+    parser = argparse.ArgumentParser(description = 'This script rerturns the Fibonacci number at\
+                                     a specified location in the Fibonacci sequence')
+    
+    # add positional arguments (these are the ones that are absolutely essential/required)
+    parser.add_argument("num", help="The Fibonacci number you wish to calculate", type = int)
+
+    # add optional arguments
+    # if 'store_true, this means assign 'True' if the argument is specified on the command
+    # line, so the default for 'store_true' is false
+    parser.add_argument("-v", "--verbose", help = "Print verbose output or not", action = 'store_true')
+
+    #parse the actual arguments
+    args = parser.parse_args()
+    print(args)
+    return args
+
 
 def calculate(n):
     #initialze varriables for calculating the Fibonacci number at this position in the sequence
@@ -23,9 +38,11 @@ def print_line(original,fib):
     print('The Fibonacci number for', original, 'is:', fib)
 
 def main():
-    original_number = get_input()
-    fib = calculate(original_number)
-    print_line(original_number,fib)
+    fib = calculate(args.num)
+    print_line(args.num,fib)
+
+# get the command line arguments
+args = get_args()    
 
 # set the environment for this script
 # is it main, or is this a module being called by another script
