@@ -16,7 +16,6 @@ def get_args():
 
     #parse the actual arguments
     args = parser.parse_args()
-    print(args)
     return args
 
 
@@ -35,7 +34,10 @@ def calculate(n):
 def print_line(original,fib):
 
     #print the output
-    print('The Fibonacci number for', original, 'is:', fib)
+    if args.verbose: 
+        print('The Fibonacci number for', original, 'is:', fib)
+    else:
+        print(fib)
 
 def main():
     fib = calculate(args.num)
